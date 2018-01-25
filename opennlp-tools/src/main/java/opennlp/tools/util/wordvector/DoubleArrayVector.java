@@ -20,7 +20,7 @@ package opennlp.tools.util.wordvector;
 import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 
-class DoubleArrayVector implements WordVector {
+class DoubleArrayVector implements WordVector, DocumentVector {
 
   private final double[] vector;
 

@@ -17,6 +17,7 @@
 
 package opennlp.tools.util.wordvector;
 
+import java.util.Arrays;
 import java.util.Map;
 
 class MapWordVectorTable implements WordVectorTable {
@@ -45,5 +46,25 @@ class MapWordVectorTable implements WordVectorTable {
     else {
       return -1;
     }
+  }
+
+  @Override
+  public DocumentVector get(String... words) {
+    DocumentVector documentVector = null;
+    int size = dimension();
+    if (size > 0) {
+      double noOfWords = words.length;
+      double[] dva = new double[size];
+      Arrays.fill(dva, 0d);
+      for (String word : words) {
+        WordVector wordVector = vectors.get(word);
+        double[] wva = wordVector.toDoubleBuffer().array();
+        for (int i = 0; i < wva.length; i++) {
+          dva[i] += wva[i] / noOfWords;
+        }
+      }
+      documentVector = new DoubleArrayVector(dva);
+    }
+    return documentVector;
   }
 }

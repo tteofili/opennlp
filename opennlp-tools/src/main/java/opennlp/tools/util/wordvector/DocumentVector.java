@@ -14,26 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package opennlp.tools.util.wordvector;
 
 import opennlp.tools.util.java.Experimental;
 
 /**
- * A table that maps tokens to word vectors.
+ * Marker interface for document vectors.
  *
- * <p>
- * Warning: Experimental new feature, see OPENNLP-1144 for details, the API might be changed anytime.
+ * DocumentVectors differ from {@link WordVector}s only in the fact that they "cover"
+ * sequences of words instead of a single word, but technically speaking they are
+ * still just a (dense) vector.
  */
 @Experimental
-public interface WordVectorTable {
-
-  WordVector get(String token);
-
-  int size();
-
-  int dimension();
-
-  DocumentVector get(String... words);
-
+public interface DocumentVector extends WordVector {
 }
